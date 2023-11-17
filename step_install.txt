@@ -1,2 +1,39 @@
-/* Create Database */
-CREATE DATABASE IF NOT EXISTS `vtl_vtl` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+/* Create Docker
+docker-compose up
+
+/* Create CakePHP (Optional if you have Code on 'src' folder
+
+docker exec -it vtl_web bash -c "cd /var/www/html/|composer create-project --no-interaction --prefer-dist cakephp/app vtl"
+
+/* Create and Restore DB
+
+Using file in 'schema' folder with Mysql Client Application
+		
+'host' => 'localhost',
+'port'=>43036
+'username' => 'root',
+'password' => '',
+
+/* Check config
+
+src/config/app_local.php
+
+Find 'Datasources' and update
+
+'default' => [
+            'host' => 'mysql',
+            'username' => 'root',
+            'password' => '',
+            'database' => 'vtl',
+            'url' => env('DATABASE_URL', null),
+        ],
+
+src/config/app.php
+
+Update value of key 'quoteIdentifiers'  to true
+
+'quoteIdentifiers' => true,
+
+/* Test Web Open web browser 
+
+http://localhost:8888/article
